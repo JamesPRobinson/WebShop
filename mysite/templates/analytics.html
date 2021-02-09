@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block head %}
+{{block.super}}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container wow fadeIn">
+        <form method="GET" class="card-body">
+            {{ form }}
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <!--
+    <form action="" method="GET">{% csrf_token %}
+        {{ form }}
+        <label for="fields">Choose parameters: </label>
+
+        <select name="choices" id="choices">
+            {% for item in form.choice %}
+            <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Create" />
+    </form>-->
+    <div class="container">
+        {% if graph %}
+        <div style="width:600;height:500">
+            {{ graph|safe }}
+        </div>
+        {% endif %}
+    </div>
+
+</main>
+{% endblock content %}
