@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, View, TemplateView, CreateView
 from .forms import CheckoutForm, GraphChoiceForm
-from .models import Item, Order, OrderItem, Address, GraphChoices
+from .models import Item, Order, OrderItem, Address
 from .plot import get_graph
 
 # qs = query set
@@ -35,26 +35,13 @@ def get_graph_choices(request):
         xfield = request.GET['x_field']
         yfield = request.GET['y_field']
         if xfield != yfield:
-            fig = get_graph()
+            fig = get_graph(xfield, yfield)
             graph = fig.to_html(
                 full_html=False, default_height=500, default_width=700)
             context['graph'] = graph
         else:
             messages.info(request, "Fields must be unique")
     return render(request, "analytics.html", context)
-
-
-class AnalyticsView(TemplateView):
-    template_name = 'analytics.html'
-    model = GraphChoices
-    form_class = GraphChoiceForm()
-
-    def get_context_data(self, **kwargs):
-        fig = get_graph()
-        graph = fig.to_html(
-            full_html=False, default_height=500, default_width=700)
-        context = {'graph': graph}
-        return context
 
 
 class CheckoutView(View):

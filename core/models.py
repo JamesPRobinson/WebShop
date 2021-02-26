@@ -16,19 +16,6 @@ LABEL_CHOICES = (
     ('D', 'danger')
 )
 
-GRAPH_CHOICES = (
-    ('location', 'LOCATION'),
-    ('avg_discount', 'DICOUNT'),
-    ('average_price', "AVGPRICE"),
-    ('max_price', 'MAX'),
-    ('popular_category', 'POPCATEGORY')
-)
-
-
-class GraphChoices(models.Model):
-    choice = models.CharField(
-        max_length=6, choices=GRAPH_CHOICES, default='green')
-
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
