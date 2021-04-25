@@ -5,10 +5,10 @@ from django_countries.widgets import CountrySelectWidget
 # iterable
 GRAPH_CHOICES = (
     ("1", "Location"),
-    ("2", "Avg. Price"),
+    ("2", "Total Spent"),
     ("3", "Category"),
-    ("4", "Discount Ratio"),
-    ("5", "Items Bought"),
+    ("4", "Total Discount"),
+    ("5", "Order Quantity"),
 )
 
 

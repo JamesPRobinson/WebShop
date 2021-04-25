@@ -36,9 +36,12 @@ def get_graph_choices(request):
         yfield = request.GET['y_field']
         if xfield != yfield:
             fig = get_graph(xfield, yfield)
-            graph = fig.to_html(
-                full_html=False, default_height=500, default_width=700)
-            context['graph'] = graph
+            if fig:
+                graph = fig.to_html(
+                    full_html=False, default_height=500, default_width=700)
+                context['graph'] = graph
+            else:
+                messages.info(request, "Not enough data to process request")
         else:
             messages.info(request, "Fields must be unique")
     return render(request, "analytics.html", context)
@@ -104,6 +107,7 @@ class CheckoutView(View):
                         )
                         address.save()
                         order.address = address
+                        order.ordered = True
                         order.save()
                         set_default_address = form.cleaned_data.get(
                             'set_default_address'
@@ -111,6 +115,8 @@ class CheckoutView(View):
                         if set_default_address:
                             address.default = True
                             address.save()
+                        order_items = order.items.all()
+                        order_items.update(ordered=True)
                         return redirect('core:home')
                     else:
                         messages.info(self.request,

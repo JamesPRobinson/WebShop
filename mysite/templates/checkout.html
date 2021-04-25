@@ -55,8 +55,7 @@
             {% if default_address %}
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" name="use_default_address" id="use_default_address">
-              <label class="custom-control-label" for="use_default_address">Use default shipping address: {{
-                default_address.street_address|truncatechars:10 }}</label>
+              <label class="custom-control-label" for="use_default_address">Use default shipping address </label>
             </div>
             {% endif %}
             <hr class="mb-4">
@@ -81,7 +80,7 @@
 
 {% block extra_scripts %}
 <script>
-  var hideable_shipping_form = $('.address_form');
+  var hideable_address_form = $('.address_form');
 
   var use_default_address = document.querySelector("input[name=use_default_address]");
 
@@ -92,7 +91,5 @@
       hideable_address_form.show();
     }
   })
-
-
 </script>
 {% endblock extra_scripts %}
