@@ -12,21 +12,9 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-    <!--
-    <form action="" method="GET">{% csrf_token %}
-        {{ form }}
-        <label for="fields">Choose parameters: </label>
-
-        <select name="choices" id="choices">
-            {% for item in form.choice %}
-            <option value="{{ item }}">{{ item }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Create" />
-    </form>-->
     <div class="container">
         {% if graph %}
-        <div style="width:600;height:500">
+        <div class="col-md-8 mb-4">
             {{ graph|safe }}
         </div>
         {% endif %}

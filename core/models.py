@@ -1,8 +1,13 @@
-from django.db import models
-from django.conf import settings
-from django.shortcuts import reverse
-from django_countries.fields import CountryField
 
+from django_countries.fields import CountryField
+from django.shortcuts import reverse
+from django.conf import settings
+from django.db import models
+import os
+
+
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(BASE)
 # First choice is in db, second is displayed
 CATEGORY_CHOICES = (
     ('S', 'Shirt'),
@@ -26,6 +31,7 @@ class Item(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     quantity = models.IntegerField(default=1)
+    image = models.TextField()
 
     def __str__(self):
         return self.title
